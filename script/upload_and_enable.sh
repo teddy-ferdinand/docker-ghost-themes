@@ -33,8 +33,6 @@ signature=$(printf '%s' "${header_payload}" | openssl dgst -binary -sha256 -mac 
 # Concat payload and signature into a valid JWT token
 TOKEN="${header_payload}.${signature}"
 
-mv 
-
 VERSION="$(date "+%Y%m%d")-$(echo "${CIRCLE_SHA1}" | cut -c "1-7")"
 
 mv breek-${CIRCLE_SHA1}.zip breek-${VERSION}.zip
