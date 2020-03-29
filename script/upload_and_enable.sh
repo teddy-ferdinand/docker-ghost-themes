@@ -35,8 +35,6 @@ TOKEN="${header_payload}.${signature}"
 
 VERSION="$(date "+%Y%m%d")-$(echo "${CIRCLE_SHA1}" | cut -c "1-7")"
 
-mv breek-${CIRCLE_SHA1}.zip breek-${VERSION}.zip
-
 # Push archive
 curl -H "Authorization: Ghost $TOKEN" \
 -F "file=@breek-${VERSION}.zip;type=application/zip" \
