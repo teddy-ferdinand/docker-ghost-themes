@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-URL="$1"
-KEY="$2"
+THEME_NAME="$1"
+URL="$2"
+KEY="$3"
 
 # Split the key into ID and SECRET
 TMPIFS=$IFS
@@ -37,9 +38,9 @@ VERSION="$(date "+%Y%m%d")-$(echo "${CIRCLE_SHA1}" | cut -c "1-7")"
 
 # Push archive
 curl -H "Authorization: Ghost $TOKEN" \
--F "file=@breek-${VERSION}.zip;type=application/zip" \
+-F "file=@${THEME_NAME}-${VERSION}.zip;type=application/zip" \
 ${URL}/ghost/api/v3/admin/themes/upload/
 
 # Activate new theme
 curl -X PUT -H "Authorization: Ghost $TOKEN" \
-${URL}/ghost/api/v3/admin/themes/breek-${VERSION}/activate/
+${URL}/ghost/api/v3/admin/themes/${THEME_NAME}-${VERSION}/activate/
